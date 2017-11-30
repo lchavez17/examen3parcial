@@ -1,0 +1,89 @@
+body{
+	margin: 0;
+	padding: 0;
+	font-size: 13px;
+	background-color: #fafafa;
+}
+main{
+	min-height: 500px;
+	margin-top: 50px;
+	margin-bottom: 50px;
+	padding: 20px;
+}
+	main .header{
+
+	}
+		main .header h2{
+			font-size: 30px;
+			margin-bottom: 0px;
+		}
+		main .header small{
+			font-size: 14px;
+			color: #888;
+		}
+	main .opciones{
+		margin-top: 20px;
+	}
+		main .opciones ul{
+			list-style: none;
+		}		
+			main .opciones ul li{
+				display: inline-block;
+				text-align: center;
+			}
+	main .contenido{
+		margin-top: 50px;
+	}
+footer{
+	height: 200px;
+	border-top: 5px solid #ccc;
+	background-color: #222;
+}
+/*
+--------------------------------------------------
+--------------------------------------------------
+--------------------------------------------------
+FORMULARIO
+--------------------------------------------------
+*/
+form .form-group{
+	
+}
+	form .form-group small{
+		color: #888;
+		letter-spacing: 1.5px;
+	}
+
+/*
+--------------------------------------------------
+--------------------------------------------------
+--------------------------------------------------
+TABLAS
+--------------------------------------------------
+*/
+.table tbody .tblheader td{
+	background-color: #eee;
+}
+
+
+/*
+--------------------------------------------------
+--------------------------------------------------
+--------------------------------------------------
+EXTRAS
+--------------------------------------------------
+*/
+.btn{
+	border-radius: 0;
+}
+.bold{
+	font-weight: bolder;
+}
+.error{
+	outline: none !important;
+	background-color: #FFFFD5;
+	box-shadow: none !important;
+}
+	.error:focus{
+		border-color: none;
+	}
