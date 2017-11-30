@@ -1,10 +1,12 @@
 <?php
 	include('header.php');
-echo date('Y-m-d H:i:s');
+$fechareg =date('Y-m-d');
+$auxfecha='';
 	try {
 		$conn = new mysqli('localhost', 'root', 'asdfg123..', 'restaurante');
 
 		if(!$conn->connect_error){
+			$fechas="SELECT or_fecha FROM ordenes ORDER BY or_id DESC";
 			$sql = "select op_id_orden,TIME_FORMAT(`or_fecha`, '%H:%I'),or_mesa,op_precio from ordenes_platillos join ordenes on ordenes.or_id=ordenes_platillos.op_id_orden group by ordenes.or_fecha";
 			$sql_sum_platillos="select  sum(ordenes_platillos.op_cantidad) as suma_platillos  from ordenes_platillos inner join ordenes on ordenes.or_id=ordenes_platillos.op_id_orden group by ordenes.or_id";
 			$sql_total="select op_precio,op_cantidad, op_precio * op_cantidad as 'total' from ordenes_platillos group by ordenes_platillos.op_id_orden";
@@ -24,7 +26,14 @@ echo date('Y-m-d H:i:s');
 			$sql_respuesta = $conn->query($sql);
 			$sql_respuesta_suma_platillos = $conn->query($sql_sum_platillos);
 			$sql_total=$conn->query($sql_total);
-
+			$result_fechas = mysqli_query($conn, $fechas)
+      or die("Error: ".mysqli_error($conn));
+			$contador = 0;
+      while($row = mysqli_fetch_array($result_fechas)){
+        $valor_fecha[$contador]=$row['or_fecha'];
+        $valor_fecha[$contador]=date("d/m/Y", strtotime($row['or_fecha']));
+        $contador++;
+      }
 		}
 	} catch (Exception $e){}
 ?>
@@ -65,6 +74,10 @@ echo date('Y-m-d H:i:s');
 					</tr>
 				</thead>
 				<tbody>
+					<?php 	$contador=0;
+						$auxiliar=0; ?>
+					<td COLSPAN="7" style="text-align: center; background-color:#ccc" ><?php echo ($valor_fecha[$contador]) ?> </td>
+
 					<?php
 						$num_rows = 0;
 						while($row = $sql_respuesta->fetch_assoc()):
@@ -72,6 +85,12 @@ echo date('Y-m-d H:i:s');
 							$row_suma=$sql_respuesta_suma_platillos->fetch_assoc();
 							$total=$row['op_precio']*$row_suma['suma_platillos'];
 					?>
+					<?php if ($valor_fecha[$auxiliar]>$valor_fecha[$contador]): ?>
+						<tr>
+          <td COLSPAN="7" style="text-align: center; background-color:#ccc" ><?php echo ($valor_fecha[$contador]) ?> </td>
+						</tr>
+					 <?php $auxiliar=$contador ?>
+					<?php endif; ?>
 							<tr>
 								<td class="text-center"><?php echo $num_rows ?></td>
 								<td class="text-center"><?php echo $row['op_id_orden'] ?></td>
@@ -89,6 +108,7 @@ echo date('Y-m-d H:i:s');
 								</td>
 							</tr>
 					<?php
+					$contador++;
 						endwhile;
 					?>
 				</tbody>

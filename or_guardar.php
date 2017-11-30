@@ -85,7 +85,7 @@
 	//$id = (isset($_POST['pa_id']) ? $_POST['pa_id'] : 0);
 
 	if($response['done'])
-		include 'platillos.php';
+		include 'ordenes.php';
 	else
 		include('or_formulario.php');
 ?>

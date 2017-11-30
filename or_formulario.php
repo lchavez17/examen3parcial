@@ -67,7 +67,7 @@
 			<div class="col-xs-12 col-md-4 opciones">
 				<ul class="col-xs-12">
 					<li class="col-xs-6">
-						<a class="btn btn-info" href="platillos.php">
+						<a class="btn btn-info" href="ordenes.php">
 							<span class="glyphicon glyphicon-chevron-left"></span>
 							Regresar
 						</a>
@@ -100,14 +100,14 @@
 							<small>Obligatorio</small>
 						</div>
 						<div class="col-xs-12 col-md-4">
-							<p><input type="text" id="datepicker" name="fecha" class="form-control col-xs-8" value="<?php echo $orden['or_fecha'] ?>"  required></p>
+							<input type="text"  name="fecha" class="form-control col-xs-8" value="<?php echo date('Y-m-d'); ?>"   disabled>
 						</div>
 					</div>
 					<div class="form-group">
 						<div class="col-xs-12">
 							<label for="correo">Total</label>
 							<small>Obligatorio</small>
-							<input type="text" name="precio" class="form-control col-xs-8" value="<?php echo $orden['op_precio'] ?>"  required>
+							<input type="text" name="precio" class="form-control col-xs-8" value="<?php echo $orden['op_precio'] ?>"   disabled>
 						</div>
 
 					</div>
@@ -140,13 +140,13 @@
 					</div>
 					<table class="table table-bordered">
 						<thead>
-							<tr>
+							<tr class="txtMult">
 								<td></td>
 								<td>Pedido</td>
 								<td>Precio Sug.</td>
-								<td>Precio</td>
-								<td>Cant.</td>
-								<td>Subtotal</td>
+								<td class="val1">Precio</td>
+								<td class="val2">Cant.</td>
+								<td class="multTotal">Subtotal</td>
 
 							</tr>
 						</thead>

@@ -4,7 +4,22 @@ $(document).ready(function(){
 		var valor = $("[name='platillos[]']:eq("+ row +")").val();
 		$('option[value="' + valor + '"]').hide();
 	}
+	function multInputs() {
+		var mult = 0;
+		// for each row:
+		$("tr.txtMult").each(function () {
+				// get the values from this row:
+				var $val1 = $('.val1', this).val();
+				var $val2 = $('.val2', this).val();
+				var $total = ($val1 * 1) * ($val2 * 1);
+				// set total for the row
+				$('.multTotal', this).text($total);
+				mult += $total;
+		});
+		$("#grandTotal").text(mult);
+}
 });
+
 
 $("form").validate({ errorPlacement: function(error, element) {} });
 
@@ -40,11 +55,11 @@ $('.btn-add-ingrediente').on('click', function(){
 		  html += '<td>' + ingrediente.text() + '</td>';
 			html += '<td>' + ingrediente.attr('precio') + '</td>';
 			html += '<td class="col-xs-4">';
-				html += '<input type="text" value="0" name="precio[]" class="form-control">';
+				html += '<input type="text" name="precio[]" class="form-control">';
 				html += '<input type="hidden" readonly value="' + ingrediente.val() + '" name="ingrediente[]" class="form-control">';
 			html += '</td>';
-			html += '<td> <input type="number" value="0" name="cantidad[]" class="form-control"> </td>';
-			html += '<td>' + "total pendiente" + '</td>';
+			html += '<td> <input type="number" name="cantidad[]" class="form-control"> </td>';
+			html += '<td><input type="text" id="grandTotal" value="" name="subtotal[]" class="form-control" disabled></td>';
 
 		html += '</tr>';
 
